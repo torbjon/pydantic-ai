@@ -135,6 +135,13 @@ class OpenAIModelSettings(ModelSettings, total=False):
     This feature is currently only supported for some OpenAI models.
     """
 
+    openai_text_verbosity: Literal['low', 'medium', 'high']
+    """Constrains the verbosity of the model's text response.
+    Lower values will result in more concise responses, while higher values will
+    result in more verbose responses. Currently supported values are `low`,
+    `medium`, and `high`.
+    """
+
 
 class OpenAIResponsesModelSettings(OpenAIModelSettings, total=False):
     """Settings used for an OpenAI Responses model request.
@@ -348,6 +355,7 @@ class OpenAIModel(Model):
                 response_format=response_format or NOT_GIVEN,
                 seed=model_settings.get('seed', NOT_GIVEN),
                 reasoning_effort=model_settings.get('openai_reasoning_effort', NOT_GIVEN),
+                verbosity=model_settings.get('openai_text_verbosity', NOT_GIVEN),
                 user=model_settings.get('openai_user', NOT_GIVEN),
                 web_search_options=web_search_options or NOT_GIVEN,
                 service_tier=model_settings.get('openai_service_tier', NOT_GIVEN),
